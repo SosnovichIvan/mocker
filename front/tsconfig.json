@@ -19,12 +19,12 @@
     "baseUrl": "src",
     "types": ["node"],
 		"paths": {
-			"providers/*": ["./providers/*"],
+			"settings/*": ["./settings/*"],
 			"app/*": ["src/app/*"],
 			"pages/*": ["./pages/*"],
-			"entities/*": ["./entities/*"],
+			"components/*": ["./components/*"],
 			"features/*": ["./features/*"],
-			"shared/*": ["./shared/*"],
+			"supporting/*": ["./supporting/*"],
 			"widgets/*": ["./widgets/*"]
 		},
   },

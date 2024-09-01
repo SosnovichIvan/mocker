@@ -7,8 +7,8 @@ export const buildResolvers = (sourcePath: string): ResolveOptions => ({
     pages: sourcePath + '/pages/',
     widgets: sourcePath + '/widgets/',
     features: sourcePath + '/features/',
-    entities: sourcePath + '/entities/',
-    shared: sourcePath + '/shared/',
-    providers: sourcePath + '/providers/',
+    components: sourcePath + '/components/',
+    supporting: sourcePath + '/supporting/',
+    settings: sourcePath + '/settings/',
   },
 })
