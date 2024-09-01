@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "typeRoots": ["node_modules/@types"],
+    "target": "ESNext",
+    "lib": ["dom", "dom.iterable", "esnext", "webworker"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "baseUrl": "src",
+    "types": ["node"],
+		"paths": {
+			"providers/*": ["./providers/*"],
+			"app/*": ["src/app/*"],
+			"pages/*": ["./pages/*"],
+			"entities/*": ["./entities/*"],
+			"features/*": ["./features/*"],
+			"shared/*": ["./shared/*"],
+			"widgets/*": ["./widgets/*"]
+		},
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  }
+}
