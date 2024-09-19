@@ -1,6 +1,4 @@
-/* eslint-disable no-undef */
-
-import { DELAY_MOCK_API } from '../constants'
+import { DELAY_MOCK_API } from 'supporting/constants'
 
 export const withMockSucces = <T>(data: T) => {
   return new Promise<T>(resolve => {

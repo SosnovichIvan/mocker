@@ -1,3 +1,11 @@
+import { StructureTree } from 'components/structureTree'
+import { Outlet } from 'react-router-dom'
+import { MainLayout } from 'supporting/layouts'
+
 export const MainPage = () => {
-  return <div>MainPage</div>
+  return (
+    <MainLayout leftBar={<StructureTree />}>
+      <Outlet />
+    </MainLayout>
+  )
 }
