@@ -11,7 +11,7 @@ export const useRedirect = () => {
 
   const navigate = useNavigate()
 
-  const isAuth = userState(state => state.getIsAuth())
+  const isAuth = userState.getState().isAuth
 
   useEffect(() => {
     const isAuthPath = authPaths.some(x => x === pathname)

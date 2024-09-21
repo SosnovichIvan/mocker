@@ -6,4 +6,5 @@ type StructureItemsData = {
   id: string
   name: string
   iconName: string
+  isMore?: boolean
 }

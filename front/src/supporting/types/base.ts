@@ -1,4 +1,4 @@
-import { HttpStatus } from '../constants'
+import { HttpStatus } from 'supporting/api'
 
 export type BaseResponse = SuccessResponse | ErrorResponse
 

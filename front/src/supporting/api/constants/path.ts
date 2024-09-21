@@ -15,4 +15,4 @@ export const API_USER_PATH = '/user'
 
 // structure
 // get
-export const API_GET_STRUCTURE_PATH = '/structure?id='
+export const API_GET_STRUCTURE_PATH = '/structure'

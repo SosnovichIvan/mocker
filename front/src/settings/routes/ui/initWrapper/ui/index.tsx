@@ -1,5 +1,6 @@
-import { Logo } from 'components/logo'
 import { Outlet } from 'react-router-dom'
+// eslint-disable-next-line import/extensions
+import LogoImage from 'supporting/image/logo.png'
 
 import { useInitData, usePing, useRedirect } from '../hooks'
 
@@ -13,7 +14,7 @@ export const InitWrapper = () => {
   if (isLoadingInitData) {
     return (
       <Styled.InitWrapper>
-        <Logo />
+        <img src={LogoImage} alt="load image logo" />
       </Styled.InitWrapper>
     )
   }

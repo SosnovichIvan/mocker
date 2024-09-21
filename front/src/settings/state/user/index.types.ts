@@ -1,4 +1,4 @@
-import { User } from 'supporting/api'
+import { User } from 'supporting/types'
 
 export type UserState = {
   user: User | null

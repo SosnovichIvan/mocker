@@ -1,8 +1,8 @@
 /* eslint-disable no-useless-catch */
 import axios, { AxiosError, type AxiosRequestConfig } from 'axios'
+import { ErrorResponseData } from 'supporting/types'
 
 import { HttpStatus, API_BASE_PATH } from '../constants'
-import { ErrorResponseData } from '../types'
 
 const RESPONSE_TIMEOUT = 60000
 

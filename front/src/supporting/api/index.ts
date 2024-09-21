@@ -15,5 +15,3 @@ const api = {
 }
 
 export { api }
-
-export type { User } from './types'

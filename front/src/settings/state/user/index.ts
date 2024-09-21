@@ -1,4 +1,4 @@
-import { User } from 'supporting/api'
+import { User } from 'supporting/types'
 import { create } from 'zustand'
 
 import { UserState } from './index.types'

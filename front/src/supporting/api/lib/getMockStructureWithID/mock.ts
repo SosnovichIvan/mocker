@@ -1,4 +1,4 @@
-import { Structure } from 'supporting/api/types'
+import { Structure } from 'supporting/types'
 
 export const parentStrucutre: Structure = {
   items: [
@@ -6,6 +6,7 @@ export const parentStrucutre: Structure = {
       id: '12',
       name: 'Folder 1',
       iconName: 'folder',
+      isMore: true,
     },
   ],
 }

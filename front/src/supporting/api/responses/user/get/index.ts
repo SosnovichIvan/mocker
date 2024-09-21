@@ -4,12 +4,12 @@ import {
   ERROR_GET_USER_RESPONSE,
   IS_MOCK_API,
 } from 'supporting/constants'
+import { User } from 'supporting/types'
 
 import { mockUser } from './mock'
 
 import { API_USER_PATH } from '../../../constants'
 import { http } from '../../../http'
-import { User } from '../../../types'
 
 export const getUserResponse = () => {
   if (IS_MOCK_API && SUCCESS_GET_USER_RESPONSE)
