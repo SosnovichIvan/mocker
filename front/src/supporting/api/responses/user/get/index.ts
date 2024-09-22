@@ -1,4 +1,3 @@
-import { withMockSucces, withMockError } from 'supporting/api/mock'
 import {
   SUCCESS_GET_USER_RESPONSE,
   ERROR_GET_USER_RESPONSE,
@@ -6,17 +5,19 @@ import {
 } from 'supporting/constants'
 import { User } from 'supporting/types'
 
-import { mockUser } from './mock'
+import { mockError, mockUser } from './mock'
 
 import { API_USER_PATH } from '../../../constants'
 import { http } from '../../../http'
 
-export const getUserResponse = () => {
-  if (IS_MOCK_API && SUCCESS_GET_USER_RESPONSE)
-    return withMockSucces<User>(mockUser)
+export const getUserResponse = (): Promise<User> => {
+  if (IS_MOCK_API) {
+    return new Promise((resolve, reject) => {
+      if (SUCCESS_GET_USER_RESPONSE) resolve(mockUser)
 
-  if (IS_MOCK_API && ERROR_GET_USER_RESPONSE)
-    return withMockError<User>(mockUser)
+      if (ERROR_GET_USER_RESPONSE) reject(mockError)
+    })
+  }
 
   return http.get<User>(API_USER_PATH)
 }

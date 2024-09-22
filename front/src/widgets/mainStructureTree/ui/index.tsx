@@ -1,17 +1,20 @@
 import { useEffect, useState } from 'react'
 
 import { api } from 'supporting/api'
+import { useNotification } from 'supporting/hooks/useNotification'
 import { Structure } from 'supporting/types'
 import { FolderStructure } from 'supporting/ui/folderStructure'
 
 export const MainStructureTree = () => {
+  const { handleErrorNotification } = useNotification()
+
   const [isLoadingItems, setIsLoadingItems] = useState(false)
   const [items, setItems] = useState<Structure['items']>([])
   const [parentName, setParentName] = useState<string>()
   const [parentIcon, setParentIcon] = useState<string>()
 
   const handleClickExpand = (id?: string) => {
-    if (id) handleSetStructureData(id)
+    handleSetStructureData(id)
 
     setIsLoadingItems(true)
     api
@@ -20,17 +23,15 @@ export const MainStructureTree = () => {
         const { items } = response
         setItems(items)
       })
-      .catch(e => console.log(e))
+      .catch(e => handleErrorNotification(e))
       .finally(() => setIsLoadingItems(false))
   }
 
-  const handleSetStructureData = (id: string) => {
+  const handleSetStructureData = (id?: string) => {
     const { name, iconName } = items.find(x => x.id === id) || {}
 
-    if (name && iconName) {
-      setParentName(name)
-      setParentIcon(iconName)
-    }
+    setParentName(name)
+    setParentIcon(iconName)
   }
 
   const handleClickRow = (id?: string) => {}

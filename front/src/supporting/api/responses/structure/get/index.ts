@@ -1,7 +1,6 @@
 import { API_GET_STRUCTURE_PATH } from 'supporting/api/constants'
 import { http } from 'supporting/api/http'
 import { getMockStructureWithID } from 'supporting/api/lib/getMockStructureWithID'
-import { withMockError, withMockSucces } from 'supporting/api/mock'
 import {
   IS_MOCK_API,
   SUCCESS_GET_STRUCTURE_RESPONSE,
@@ -9,12 +8,16 @@ import {
 } from 'supporting/constants'
 import { Structure } from 'supporting/types'
 
-export const getStructureResponse = (id?: string) => {
-  if (IS_MOCK_API && SUCCESS_GET_STRUCTURE_RESPONSE)
-    return withMockSucces(getMockStructureWithID(id))
+import { mockError } from './mock'
 
-  if (IS_MOCK_API && ERROR_GET_STRUCTURE_RESPONSE)
-    return withMockError(getMockStructureWithID(id))
+export const getStructureResponse = (id?: string): Promise<Structure> => {
+  if (IS_MOCK_API) {
+    return new Promise((resolve, reject) => {
+      if (SUCCESS_GET_STRUCTURE_RESPONSE) resolve(getMockStructureWithID(id))
+
+      if (ERROR_GET_STRUCTURE_RESPONSE) reject(mockError)
+    })
+  }
 
   const path = id ? API_GET_STRUCTURE_PATH + `/${id}` : API_GET_STRUCTURE_PATH
 

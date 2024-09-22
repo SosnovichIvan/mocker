@@ -11,4 +11,6 @@ export const CellWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 4px;
+
+  background: #f5efef;
 `

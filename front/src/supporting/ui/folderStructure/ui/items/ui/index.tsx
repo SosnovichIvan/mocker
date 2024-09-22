@@ -22,14 +22,14 @@ export const Items = (props: ItemsProps) => {
 
   return (
     <Styled.ItemsWrapper>
-      <Breadcrumbs />
+      <Breadcrumbs {...{ handleClickExpand, name, iconName }} />
       <>
         {isLoadingItems ? (
           <Styled.ItemsLoader>
             <Skeleton rows={DEFAULT_SKELETON_ROWS} />
           </Styled.ItemsLoader>
         ) : (
-          <>
+          <Styled.ItemsCellsBlock>
             {map(items, item => (
               <Cell
                 key={item.id}
@@ -43,7 +43,7 @@ export const Items = (props: ItemsProps) => {
                 }}
               />
             ))}
-          </>
+          </Styled.ItemsCellsBlock>
         )}
       </>
     </Styled.ItemsWrapper>

@@ -1,4 +1,4 @@
-import { getIcon } from '../lib/getIcon'
+import { getIcon } from '../../../../../lib/getIcon'
 
 import { InformationProps } from './index.types'
 
