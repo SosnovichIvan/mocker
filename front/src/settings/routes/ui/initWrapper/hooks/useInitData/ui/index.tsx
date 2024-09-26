@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { appState } from 'settings/state'
 import { api } from 'supporting/api'
-import { ROUTE_REGISTER_PATH, ROUTE_MAIN_HOME_PATH } from 'supporting/constants'
+import { ROUTE_MAIN_HOME_PATH, ROUTE_AUTH_PATH } from 'supporting/constants'
 
 export const useInitData = () => {
   const navigate = useNavigate()
@@ -22,7 +22,7 @@ export const useInitData = () => {
         navigate(ROUTE_MAIN_HOME_PATH)
       })
       .catch(() => {
-        navigate(ROUTE_REGISTER_PATH)
+        navigate(ROUTE_AUTH_PATH)
         cleanUser()
       })
       .finally(() => setIsLoadingInitData(false))

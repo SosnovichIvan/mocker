@@ -1,3 +1,5 @@
+import { Authentication } from 'widgets/Authentication'
+
 export const AuthPage = () => {
-  return <div>AuthPage</div>
+  return <Authentication />
 }
