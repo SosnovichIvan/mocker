@@ -1,0 +1,8 @@
+.eslintcache
+# src/api/v1
+# src/api/wsdb
+
+# dependencies
+node_modules
+# production
+dist

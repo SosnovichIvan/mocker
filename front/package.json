@@ -8,7 +8,8 @@
     "start": "webpack serve --mode=development",
     "dev": "webpack serve --mode=development",
     "lint": "eslint ./src --ext '.ts,.tsx',.js",
-    "lint:fix": "npm run lint -- --fix"
+    "lint:fix": "npm run lint -- --fix",
+    "start:back": "cd ../back && npm start"
   },
   "dependencies": {
     "antd": "^5.20.3",
