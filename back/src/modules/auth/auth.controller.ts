@@ -18,7 +18,7 @@ export class AuthController {
     this._authService
       .userAuth(userAuth)
       .then((token) => {
-        response.send({ token });
+        response.cookie("SID", token).sendStatus(HttpStatus.OK)
       })
       .catch((e) =>
         response.status(HttpStatus.FORBIDDEN).send({
