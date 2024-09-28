@@ -6,7 +6,6 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { AuthGuard } from '@nestjs/passport';
 import { Request } from 'express';
-import { ResponseErrorData } from 'src/shared/dto';
 import { error } from './error';
 
 @Injectable()

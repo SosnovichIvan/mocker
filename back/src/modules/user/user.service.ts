@@ -1,17 +1,19 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { UserRepository } from './user.repositories';
 
-import { UserJWT } from 'src/shared/types';
-import { UserAuthDTO } from '../auth/dto';
+import { UserJWT } from 'shared/types';
+import { UserAuthDTO, UserRegisterDTO } from 'shared/dto/auth';
 
 @Injectable()
 export class UserService {
-  private readonly logger = new Logger(UserService.name);
-
   constructor(private _userRepository: UserRepository) {}
 
   async userAuth(data: UserAuthDTO) {
-    return this._userRepository.userAuth(data);
+    return await this._userRepository.userAuth(data);
+  }
+
+  async userRegister(data: UserRegisterDTO) {
+    return await this._userRepository.userRegister(data);
   }
 
   async _validateUser(data: UserJWT) {

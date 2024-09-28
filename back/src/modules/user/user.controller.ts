@@ -9,10 +9,10 @@ import {
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UserService } from './user.service';
 import { CreateUserDTO } from './dto';
-import { Roles } from 'src/shared/guards/rolesGuard/decorator';
-import { UserRole } from 'src/shared/types';
+import { Roles } from 'shared/guards/rolesGuard/decorator';
+import { UserRole } from 'shared/types';
 import { Response } from 'express';
-import { JwtAuthGuard, RolesGuard } from 'src/shared/guards';
+import { JwtAuthGuard, RolesGuard } from 'shared/guards';
 
 @ApiTags('user contorller')
 @Controller('user')

@@ -1,6 +1,6 @@
 import { IsString, IsNotEmpty, IsHash, IsEnum, IsEmail } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { UserRole } from 'src/shared/types';
+import { UserRole } from 'shared/types';
 
 export class CreateUserDTO {
   @ApiProperty({ required: true })
