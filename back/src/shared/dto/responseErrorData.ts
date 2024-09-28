@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, IsEnum, IsObject } from 'class-validator';
+import { IsString, IsNotEmpty, IsEnum, IsArray } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { HttpStatus } from '@nestjs/common';
 
@@ -10,8 +10,13 @@ export class ResponseErrorData {
 
   @IsString()
   @IsNotEmpty()
-  @ApiProperty({ required: true })
-  message: string;
+  @ApiProperty({ required: false })
+  messages?: string;
+
+  @IsArray()
+  @IsNotEmpty()
+  @ApiProperty({ required: false, isArray: true, type: 'string' })
+  message?: string[]
 }
 
 

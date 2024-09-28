@@ -3,5 +3,5 @@ import { ResponseErrorData } from 'shared/dto';
 
 export const error: ResponseErrorData = {
   code: HttpStatus.UNAUTHORIZED,
-  message: 'error user validate',
+  messages: 'error user validate',
 };
