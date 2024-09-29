@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { ProjectModule } from './app';
-
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -9,6 +8,7 @@ import { ProjectModule } from './app';
       envFilePath: '.env',
     }),
     ProjectModule,
+
   ],
   controllers: [],
   providers: [],

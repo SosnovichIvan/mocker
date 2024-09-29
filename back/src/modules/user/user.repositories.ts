@@ -1,89 +1,60 @@
-import { Injectable, Logger } from "@nestjs/common";
+import { Inject, Injectable, Logger } from "@nestjs/common";
 import { UserNotFoundException } from "shared/exceptions";
 import { UserAuthDTO, UserRegisterDTO } from "shared/dto/auth";
-import { User, UserRole } from "shared/types";
+import { User, UserJWT, UserRole } from "shared/types";
 import * as bcrypt from "bcrypt";
+import { USER_REPOSITORI_NAME } from "./user.provider";
+import { Users } from "modules/database";
+import { CREATE_USER, FIND_USER_WITH_LOGIN } from "./sql";
+import { QueryTypes } from "sequelize";
+import { get } from "lodash";
 
 @Injectable()
 export class UserRepository {
 	private readonly logger = new Logger(UserRepository.name);
-	private userBD: User[] = [
-		{
-			id: "dasdasd",
-			login: "test333",
-			password: "$2b$10$2Wng7CO/uHEXACYprgKXY.MYXqcmiMogaw5mEgGr/4dR/l308faxy",
-			role: UserRole.SUPER_ADMIN,
-			email: "test1@mail.ru",
-		},
-	];
-
-	constructor() {}
+	constructor(@Inject(USER_REPOSITORI_NAME) private repositori: typeof Users) {}
 
 	async userAuth(data: UserAuthDTO) {
 		const { login, password } = data;
 		this.logger.log("Поиск пользователя в базе данных по логину: " + login);
 
-		const user = this.userBD.find(
-			(x) => x.email === login || x.login === login
-		);
+		const [userWithLogin] = (await this.repositori.sequelize.query(
+			FIND_USER_WITH_LOGIN,
+			{
+				replacements: { login },
+				type: QueryTypes.SELECT,
+			}
+		)) as User[];
 
-		if (!user) {
-			this.logger.error(
-				`В базе данных пользователь по логину: ${login} не найден`
-			);
-
-			throw new UserNotFoundException("user not found");
-		}
-
-		const isMatch = await bcrypt.compare(password, user.password);
-
-		if (!isMatch) {
-			this.logger.error(`Не совпадают пароли по логину: ${login}`);
-			throw Error("user ore password error");
-		}
-
-		this.logger.debug("Пользователь найден и пароли совпадают");
-
-		return user;
+		return userWithLogin;
 	}
 
-	async userRegister(data: UserRegisterDTO) {
+	async userRegister(data: UserRegisterDTO): Promise<UserJWT> {
 		const { login, password, email } = data;
-		this.logger.log("Поиск пользователя в базе данных по логину: " + login);
 
-		const userWithLogin = this.userBD.find((x) => x.login === login);
+		try {
+			const cryproPassword = await bcrypt.hash(password, 10);
 
-		if (userWithLogin) {
-			this.logger.error(
-				`В базе данных пользователь по логину: ${login} уже есть`
-			);
+			const saveData = await this.repositori.sequelize.query(CREATE_USER, {
+				replacements: {
+					login,
+					password: cryproPassword,
+					role: UserRole.USER,
+					email,
+				},
+				type: QueryTypes.INSERT,
+			});
 
-			throw new UserNotFoundException("Логин уже занят");
+			const id = get(saveData, "0.id", "");
+
+			return {
+				password: cryproPassword,
+				login,
+				role: UserRole.USER,
+				id,
+			};
+		} catch (e) {
+			throw Error(e.toString());
 		}
-
-		const userWithEmail = this.userBD.find((x) => x.email === email);
-
-		if (userWithEmail) {
-			this.logger.error(
-				`В базе данных пользователь по email: ${email} уже есть`
-			);
-			throw Error("Email уже занят");
-		}
-
-		const cryproPassword = await bcrypt.hash(password, 10);
-
-		this.logger.debug("Пароль зашифрован сохраняем в базе");
-
-		const newUser: User = {
-			login,
-			email,
-			password: cryproPassword,
-			role: UserRole.USER,
-			id: `${this.userBD.length}`,
-		};
-
-		this.userBD.push(newUser);
-
-		return newUser;
 	}
 }
