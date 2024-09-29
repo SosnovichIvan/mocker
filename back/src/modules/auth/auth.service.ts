@@ -35,9 +35,7 @@ export class AuthService {
 
 		const user = await this._userService.userRegister(data);
 
-		const token = await this.getUserToken(user);
-
-		return token;
+		return this.jwtService.sign(user)
 	}
 
 	async getUserToken({ id, password, login, role }: User) {
