@@ -1,9 +1,9 @@
-import { InputData } from 'supporting/types'
+import { InputProps } from './input.types'
 
 import * as Styled from './index.styled'
 
-export const InputText = (props: InputData) => {
-  const { text } = props
+export const InputText = (props: InputProps) => {
+  const { placeholder } = props
 
-  return <Styled.Field placeholder={text} />
+  return <Styled.InputTextWrapper {...{ placeholder }} />
 }
