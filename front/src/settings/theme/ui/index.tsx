@@ -1,3 +1,4 @@
+import { StyleProvider } from '@ant-design/cssinjs'
 import { ThemeProvider as StyledThemeProvider } from 'styled-components'
 
 import { useGetTheme } from '../hooks/useGetTheme'
@@ -9,5 +10,9 @@ export const ThemeProvider = (props: ThemeProviderProps) => {
 
   const theme = useGetTheme()
 
-  return <StyledThemeProvider {...{ theme }}>{children}</StyledThemeProvider>
+  return (
+    <StyledThemeProvider {...{ theme }}>
+      <StyleProvider layer>{children}</StyleProvider>
+    </StyledThemeProvider>
+  )
 }
